@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('website')->nullable();
             $table->text('profile_img_url')->nullable();
             $table->string('location')->nullable();
-            $table->string('title')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

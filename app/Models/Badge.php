@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Badge extends Model
 {
+    protected $fillable=[
+        'description',
+        'badge_rank',
+    ];
     use HasFactory;
 }

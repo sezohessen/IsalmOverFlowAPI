@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class QuestionTag extends Model
 {
+    protected $fillable = [
+        'question_id',
+        'tag_id'
+    ];
     use HasFactory;
 }

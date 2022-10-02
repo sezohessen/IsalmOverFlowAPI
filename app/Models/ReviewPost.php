@@ -7,5 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReviewPost extends Model
 {
+    protected $fillable = [
+        'question_id',
+        'description',
+        'question_id',
+        'user_id'
+    ];
     use HasFactory;
 }
