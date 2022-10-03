@@ -19,21 +19,18 @@ class UserController extends Controller
         //
     }
 
-    public function register(StoreUserRequest $request)
-    {
-        $credentials = User::Register($request);
-        $user        = User::create($credentials);
-        return $user;
-    }
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(StoreUserRequest $request)
     {
-
+        $credentials = User::Register($request);
+        $user        = User::create($credentials);
+        return $user;
     }
 
     /**

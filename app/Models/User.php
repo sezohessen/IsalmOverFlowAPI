@@ -51,6 +51,19 @@ class User extends Authenticatable
         ];
         return $credentials;
     }
+
+    public static function Edit(Request $request,$img)
+    {
+        $credentials = [
+            'name'              => $request->name,
+            'about'             => $request->about,
+            'website'           => $request->website,
+            'title'             => $request->title,
+            'location'          => $request->location,
+            'profile_img_url'   => $img,
+        ];
+        return $credentials;
+    }
     /**
      * The attributes that should be cast.
      *
