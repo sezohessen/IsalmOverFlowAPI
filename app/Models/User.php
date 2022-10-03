@@ -5,7 +5,9 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -21,6 +23,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'reputation',
+        'last_access',
+        'about',
+        'website',
+        'profile_img_url',
+        'location',
+        'title',
     ];
 
     /**
@@ -33,6 +42,15 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public static function Register(Request $request)
+    {
+        $credentials = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ];
+        return $credentials;
+    }
     /**
      * The attributes that should be cast.
      *
