@@ -20,8 +20,4 @@ class LoginController extends Controller
         $request->session()->regenerate();
     }
 
-    public function authUser(Request $request)
-    {
-        return $this->returnData('data', $request->user(),'user');
-    }
 }
