@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StoreUserRequest;
 
 class UserController extends Controller
 {
@@ -26,11 +27,11 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUserRequest $request)
+    public function register(StoreUserRequest $request)
     {
         $credentials = User::Register($request);
         $user        = User::create($credentials);
-        return $user;
+        Auth::loginUsingId($user);
     }
 
     /**
