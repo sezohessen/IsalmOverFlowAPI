@@ -31,7 +31,6 @@ class UserController extends Controller
     {
         $credentials = User::Register($request);
         $user        = User::create($credentials);
-        Auth::loginUsingId($user);
     }
 
     /**
