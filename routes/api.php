@@ -20,6 +20,9 @@ Route::post('/register',[UserController::class,'register']);
 Route::post("/login", [LoginController::class, "login"]);
 
 Route::group(['middleware' => "auth:sanctum"], function () {
+    Route::get('/getAuth', function() {
+        dd(auth()->user());
+    });
     // Return auth user
     Route::get("/user", function (Request $request) {
         return $request->user();
