@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Trait\ApiTrait;
 
 class UserController extends Controller
 {
+    use ApiTrait;
     /**
      * Display a listing of the resource.
      *
@@ -31,6 +34,14 @@ class UserController extends Controller
     {
         $credentials = User::Register($request);
         $user        = User::create($credentials);
+
+        // For post man and phone dev
+        $user  = User::where('email', $request->email)->first();
+        $token = $user->createToken($user->id)->plainTextToken;
+        $data  = [
+            "token" => $token
+        ];
+        return $this->returnData('data', $data, 'registered');
     }
 
     /**
@@ -51,9 +62,26 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request)
     {
-        //
+        $User = User::where('id', auth()->user()->id)->first();
+        // Update profile image
+        if($request->image)
+        {
+            $uploadImg = add_Image($request->image,User::base);
+            $User->update([
+                'profile_img_url' => $uploadImg
+            ]);
+        }
+
+        $User->update([
+            'name'              => $request->name,
+            'about'             => $request->about,
+            'location'          => $request->location,
+            'title'             => $request->title,
+            'website'           => $request->website,
+        ]);
+        return $this->returnSuccess('user has been updated');
     }
 
     /**

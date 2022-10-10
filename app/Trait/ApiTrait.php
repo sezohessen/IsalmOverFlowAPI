@@ -25,10 +25,11 @@ trait ApiTrait {
             "status_code"   => 200
         ]);
     }
-    public function returnSuccess($msg=""){
+    public function returnSuccess($msg="",$code = 200){
         return response()->json([
-            'status'=>true,
-            "msg"=>$msg
+            'status'    => true,
+            'code'      => $code,
+            "msg"       => $msg
         ]);
     }
     public function returnData($key,$value,$msg="",array $extra=[]){

@@ -19,12 +19,12 @@ class LoginController extends Controller
             return $this->errorMessage('Wrong email or password', 401);
         }
         $request->session()->regenerate();
-        return response()->json('Logged In',200);
-        // $user  = User::where('email', $request->email)->first();
-        // $token = $user->createToken($user->id)->plainTextToken;
-        // $data  = [
-        //     "token" => $token
-        // ];
-        // return $data;
+        // For post man and phone dev
+        $user  = User::where('email', $request->email)->first();
+        $token = $user->createToken($user->id)->plainTextToken;
+        $data  = [
+            "token" => $token
+        ];
+        return $this->returnData('data', $data, 'Logged in');
     }
 }

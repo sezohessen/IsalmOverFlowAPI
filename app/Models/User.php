@@ -32,6 +32,8 @@ class User extends Authenticatable
         'title',
     ];
 
+    const base = '\profile-img';
+
     /**
      * The attributes that should be hidden for serialization.
      *
