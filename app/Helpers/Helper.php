@@ -155,3 +155,12 @@ if (!function_exists('add_Image')) {
         return $ImageLink;
     }
 }
+// Add image
+if (!function_exists('add_nuxt_file')) {
+    function add_nuxt_file($image)
+    {
+        $imageName = time().'.'.$image->extension();
+        $ImageLink = $image->move(public_path('images'), $imageName);
+        return $ImageLink;
+    }
+}

@@ -64,11 +64,11 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request)
     {
+
         $User = User::where('id', auth()->user()->id)->first();
         // Update profile image
-        if($request->image)
-        {
-            $uploadImg = add_Image($request->image,User::base);
+        if ($request->image) {
+            $uploadImg = add_Image($request->image, User::base);
             $User->update([
                 'profile_img_url' => $uploadImg
             ]);
@@ -82,6 +82,18 @@ class UserController extends Controller
             'website'           => $request->website,
         ]);
         return $this->returnSuccess('user has been updated');
+    }
+
+    public function updateIMG(Request $request)
+    {
+        $User = User::where('id', auth()->user()->id)->first();
+
+        $uploadImg = add_Image($request->image, User::base);
+        $User->update([
+            'profile_img_url' => $uploadImg
+        ]);
+        return $this->returnSuccess('user has been updated');
+
     }
 
     /**
